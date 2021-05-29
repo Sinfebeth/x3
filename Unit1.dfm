@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 212
-  Top = 161
+  Left = 345
+  Top = 183
   Width = 1088
   Height = 590
   Caption = 'Form1'
@@ -42,12 +42,18 @@ object Form1: TForm1
     Height = 26
     Caption = #1087#1088#1072#1074#1072#1103' '#13#10#1075#1088#1072#1085#1080#1094#1072
   end
+  object tst: TLabel
+    Left = 914
+    Top = 492
+    Width = 3
+    Height = 13
+  end
   object btn1: TButton
     Left = 897
     Top = 426
     Width = 120
     Height = 31
-    Caption = 'btn1'
+    Caption = #1089#1086#1079#1076#1072#1090#1100
     TabOrder = 0
     OnClick = btn1Click
   end
@@ -41481,12 +41487,13 @@ object Form1: TForm1
     BackWall.Brush.Style = bsClear
     Gradient.EndColor = clRed
     MarginBottom = 0
-    MarginLeft = 0
+    MarginLeft = 1
     MarginRight = 0
     MarginTop = 0
     Title.Text.Strings = (
       '')
     Chart3DPercent = 35
+    LeftAxis.StartPosition = 1.000000000000000000
     Legend.HorizMargin = 8
     RightAxis.Visible = False
     View3D = False
@@ -41530,12 +41537,16 @@ object Form1: TForm1
     TabOrder = 3
   end
   object scrlbr1: TScrollBar
-    Left = 60
+    Left = 61
     Top = 502
     Width = 395
     Height = 19
+    Max = 0
+    Min = -100
     PageSize = 0
+    Position = -100
     TabOrder = 4
+    OnChange = scrlbr1Change
   end
   object scrlbr2: TScrollBar
     Left = 456
@@ -41543,7 +41554,9 @@ object Form1: TForm1
     Width = 381
     Height = 19
     PageSize = 0
+    Position = 100
     TabOrder = 5
+    OnChange = scrlbr2Change
   end
   object lst1: TListBox
     Left = 874

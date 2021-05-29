@@ -22,8 +22,11 @@ type
     lbl4: TLabel;
     edt3: TEdit;
     edt4: TEdit;
+    tst: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
+    procedure scrlbr2Change(Sender: TObject);
+    procedure scrlbr1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,24 +35,27 @@ type
 
 var
   Form1: TForm1;
-
+   h, x: real;
+   i: Integer;
+   a,b:Real;
 implementation
 
 {$R *.dfm}
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-lst1.Items.Add('f1');
+lst1.Items.Add('y=mod(x,a)');
 lst1.Items.Add('f2');
 lst1.Items.Add('f3');
+
 end;
 
 procedure TForm1.btn1Click(Sender: TObject);
-var
-
-  h, x: real;
-   i: Integer;
 begin
+     cht1.SeriesList[0].Clear;
+     {левая и правая граница}
+     scrlbr2.Max:=StrToInt(edt4.text);
+     scrlbr1.Min:=StrToInt(edt3.text);
 
      if lst1.Selected[0] then
      begin
@@ -58,12 +64,28 @@ begin
 
 
   repeat
-    Cht1.SeriesList[0].AddXY(x,sin(x * Pi) );
+    {создание графика}
+    Cht1.SeriesList[0].AddXY(x,Sin(x*Pi));
 
     x := x + h;
-  until x > StrToInt(edt4.text);
+  until x > StrToInt(edt4.text) ;
 end;
 
 
   end;
+procedure TForm1.scrlbr2Change(Sender: TObject);
+begin
+  {изменение правого предела графика}
+     edt4.Text:=IntToStr(scrlbr2.Position);
+
+       btn1.Click;
+end;
+
+procedure TForm1.scrlbr1Change(Sender: TObject);
+begin
+      {изменение левого предела графика}
+      edt3.Text:=IntToStr(scrlbr1.Position);
+      btn1.Click;
+end;
+
 end.
