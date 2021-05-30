@@ -4,29 +4,30 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, jpeg, ExtCtrls, TeeProcs, TeEngine, Chart, Series;
+  Dialogs, StdCtrls, jpeg, ExtCtrls, TeeProcs, TeEngine, Chart, Series,
+  sSkinManager;
 
 type
   TForm1 = class(TForm)
-    btn1: TButton;
-    cht1: TChart;
-    edt1: TEdit;
-    edt2: TEdit;
-    scrlbr1: TScrollBar;
-    scrlbr2: TScrollBar;
-    lst1: TListBox;
+    button_create: TButton;
+    graph: TChart;
+    b_variable: TEdit;
+    a_variable: TEdit;
+    left_border_scroll: TScrollBar;
+    right_border_scroll: TScrollBar;
+    list_of_functions: TListBox;
     TLS: TLineSeries;
     lbl1: TLabel;
     lbl2: TLabel;
     lbl3: TLabel;
     lbl4: TLabel;
-    edt3: TEdit;
-    edt4: TEdit;
-    tst: TLabel;
+    left_border_edit: TEdit;
+    right_border_edit: TEdit;
+    sknmngr1: TsSkinManager;
     procedure FormCreate(Sender: TObject);
-    procedure btn1Click(Sender: TObject);
-    procedure scrlbr2Change(Sender: TObject);
-    procedure scrlbr1Change(Sender: TObject);
+    procedure button_createClick(Sender: TObject);
+    procedure right_border_scrollChange(Sender: TObject);
+    procedure left_border_scrollChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,48 +45,50 @@ implementation
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-lst1.Items.Add('y=mod(x,a)');
-lst1.Items.Add('f2');
-lst1.Items.Add('f3');
-
+  with list_of_functions do
+  begin
+Items.Add('y=x^3');
+Items.Add('f2');
+Items.Add('f3');
+end;
 end;
 
-procedure TForm1.btn1Click(Sender: TObject);
+procedure TForm1.button_createClick(Sender: TObject);
 begin
-     cht1.SeriesList[0].Clear;
+     graph.SeriesList[0].Clear;
      {левая и правая граница}
-     scrlbr2.Max:=StrToInt(edt4.text);
-     scrlbr1.Min:=StrToInt(edt3.text);
+     right_border_scroll.Max:=StrToInt(right_border_edit.text);
+     left_border_scroll.Min:=StrToInt(left_border_edit.text);
 
-     if lst1.Selected[0] then
+     if list_of_functions.Selected[0] then
      begin
-  x := StrToInt(edt3.text);
+  x := StrToInt(left_border_edit.text);
   h := 0.05;
 
 
   repeat
     {создание графика}
-    Cht1.SeriesList[0].AddXY(x,Sin(x*Pi));
+    graph.SeriesList[0].AddXY(x,x*x*x);
 
     x := x + h;
-  until x > StrToInt(edt4.text) ;
+  until x > StrToInt(right_border_edit.text) ;
 end;
 
 
   end;
-procedure TForm1.scrlbr2Change(Sender: TObject);
+procedure TForm1.right_border_scrollChange(Sender: TObject);
 begin
   {изменение правого предела графика}
-     edt4.Text:=IntToStr(scrlbr2.Position);
+     right_border_edit.Text:=IntToStr(right_border_scroll.Position);
 
-       btn1.Click;
+       button_create.Click;
 end;
 
-procedure TForm1.scrlbr1Change(Sender: TObject);
+procedure TForm1.left_border_scrollChange(Sender: TObject);
 begin
       {изменение левого предела графика}
-      edt3.Text:=IntToStr(scrlbr1.Position);
-      btn1.Click;
+      left_border_edit.Text:=IntToStr(left_border_scroll.Position);
+      button_create.Click;
 end;
 
 end.
