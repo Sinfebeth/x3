@@ -4,10 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, jpeg, ExtCtrls, TeeProcs, TeEngine, Chart, Series,
-  sSkinManager, ComCtrls, Spin, sEdit, sSpinEdit, acDBDecimalSpinEdit,
-  acArcControls, sLabel, acDBTextFX, sGauge, sBevel, acProgressBar, sPanel,
-  Mask, sMaskEdit, sCustomComboEdit, sComboEdit;
+  Dialogs, StdCtrls, jpeg, ExtCtrls, TeeProcs, TeEngine, Chart, Series, ComCtrls, Spin, Mask;
 
 type
   TForm1 = class(TForm)
@@ -21,11 +18,10 @@ type
     lbl2: TLabel;
     lbl3: TLabel;
     lbl4: TLabel;
-    sknmngr1: TsSkinManager;
     lbl5: TLabel;
     c_variable: TEdit;
-    left_border_changer: TsDecimalSpinEdit;
-    right_border_changer: TsDecimalSpinEdit;
+    left_border_changer: TSpinEdit;
+    right_border_changer: TSpinEdit;
     procedure FormCreate(Sender: TObject);
     procedure button_createClick(Sender: TObject);
   private
@@ -83,6 +79,7 @@ begin
     x:=x/100;
     x := x + h;
   until x > StrToInt(right_border_changer.text) ;
+
 end;
 
      //вторая формула
